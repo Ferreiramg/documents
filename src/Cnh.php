@@ -4,7 +4,6 @@ namespace Brazanation\Documents;
 
 final class Cnh extends AbstractDocument
 {
-
     const LENGTH = 11;
     const LABEL = 'CNH';
     const REGEX = '/^([\d]{3})([\d]{3})([\d]{4})([\d]{1})$/';

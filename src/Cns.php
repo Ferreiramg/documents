@@ -7,7 +7,6 @@ use Brazanation\Documents\Cns\TemporaryCalculator;
 
 final class Cns extends AbstractDocument
 {
-
     const LENGTH = 15;
     const LABEL = 'CNS';
     const REGEX = '/^([\d]{3})([\d]{4})([\d]{4})([\d]{4})$/';

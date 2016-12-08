@@ -1,5 +1,5 @@
 <?php
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Brazanation\Documents;
 
@@ -33,7 +33,6 @@ namespace Brazanation\Documents;
  */
 class DigitCalculator
 {
-
     const MODULE_10 = 10;
     const MODULE_11 = 11;
 
@@ -205,6 +204,7 @@ class DigitCalculator
      * Calculates the check digit from given numeric section.
      *
      * @return string Returns a single calculated digit.
+     *
      * @throws \DivisionByZeroError
      */
     public function calculate()

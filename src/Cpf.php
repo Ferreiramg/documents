@@ -4,7 +4,6 @@ namespace Brazanation\Documents;
 
 final class Cpf extends AbstractDocument
 {
-
     const LENGTH = 11;
     const LABEL = 'CPF';
     const REGEX = '/^([\d]{3})([\d]{3})([\d]{3})([\d]{2})$/';

@@ -29,7 +29,7 @@ class MatoGrosso extends State
             return str_pad(parent::normalizeNumber($number), $this->getLength(), '0', STR_PAD_LEFT);
         }
 
-        return $number??"";
+        return $number ?? '';
     }
 
     /**

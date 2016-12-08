@@ -1,5 +1,5 @@
 <?php
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Brazanation\Documents\StateRegistration;
 
@@ -7,7 +7,6 @@ use Brazanation\Documents\DigitCalculator;
 
 final class Acre extends State
 {
-
     const LONG_NAME = 'Acre';
     const SHORT_NAME = 'AC';
     const REGEX = '/^(01)(\d{3})(\d{3})(\d{3})(\d{2})$/';

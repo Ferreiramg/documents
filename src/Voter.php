@@ -19,7 +19,7 @@ final class Voter extends AbstractDocument
      * @param string $section [optional]
      * @param string $zone    [optional]
      */
-    public function __construct(string $number,  string $section = '', string $zone = '')
+    public function __construct(string $number, string $section = '', string $zone = '')
     {
         $number = preg_replace('/\D/', '', $number);
         parent::__construct($number, self::LENGTH, 2, self::LABEL);

@@ -4,7 +4,6 @@ namespace Brazanation\Documents;
 
 final class Cnpj extends AbstractDocument
 {
-
     const LENGTH = 14;
     const LABEL = 'CNPJ';
     const REGEX = '/^([\d]{2})([\d]{3})([\d]{3})([\d]{4})([\d]{2})$/';

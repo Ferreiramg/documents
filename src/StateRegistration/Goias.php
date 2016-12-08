@@ -6,7 +6,6 @@ use Brazanation\Documents\DigitCalculator;
 
 final class Goias extends State
 {
-
     const LONG_NAME = 'Goias';
     const REGEX = '/^(1[015])(\d{3})(\d{3})(\d{1})$/';
     const FORMAT = '$1.$2.$3-$4';

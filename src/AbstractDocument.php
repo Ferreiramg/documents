@@ -1,5 +1,5 @@
 <?php
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Brazanation\Documents;
 
@@ -139,7 +139,8 @@ abstract class AbstractDocument implements DigitCalculable, Formattable
         if ($number = substr($number, 0, -($this->numberOfDigits))) {
             return $number;
         }
-        return "";
+
+        return '';
     }
 
     /**
