@@ -1,13 +1,12 @@
 <?php
-
+declare(strict_types=1);
 namespace Brazanation\Documents;
 
 final class Cnpj extends AbstractDocument
 {
+
     const LENGTH = 14;
-
     const LABEL = 'CNPJ';
-
     const REGEX = '/^([\d]{2})([\d]{3})([\d]{3})([\d]{4})([\d]{2})$/';
 
     /**
@@ -24,7 +23,7 @@ final class Cnpj extends AbstractDocument
     /**
      * {@inheritdoc}
      */
-    public function format()
+    public function format(): string
     {
         return preg_replace(self::REGEX, '$1.$2.$3/$4-$5', "{$this}");
     }
@@ -32,7 +31,7 @@ final class Cnpj extends AbstractDocument
     /**
      * {@inheritdoc}
      */
-    public function calculateDigit($baseNumber)
+    public function calculateDigit($baseNumber): string
     {
         $calculator = new DigitCalculator($baseNumber);
         $calculator->useComplementaryInsteadOfModule();

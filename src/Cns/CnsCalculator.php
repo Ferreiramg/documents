@@ -1,5 +1,5 @@
 <?php
-
+declare(strict_types=1);
 namespace Brazanation\Documents\Cns;
 
 use Brazanation\Documents\DigitCalculable;
@@ -10,7 +10,7 @@ final class CnsCalculator implements DigitCalculable
     /**
      * {@inheritdoc}
      */
-    public function calculateDigit($baseNumber)
+    public function calculateDigit($baseNumber): string
     {
         $pis = substr($baseNumber, 0, 11);
 

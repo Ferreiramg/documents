@@ -1,13 +1,12 @@
 <?php
-
+declare(strict_types=1);
 namespace Brazanation\Documents;
 
 final class Cnh extends AbstractDocument
 {
+
     const LENGTH = 11;
-
     const LABEL = 'CNH';
-
     const REGEX = '/^([\d]{3})([\d]{3})([\d]{4})([\d]{1})$/';
 
     /**
@@ -24,7 +23,7 @@ final class Cnh extends AbstractDocument
     /**
      * {@inheritdoc}
      */
-    public function calculateDigit($baseNumber)
+    public function calculateDigit($baseNumber): string
     {
         $firstDigit = $this->calculateFirstDigit($baseNumber);
         $secondDigit = $this->calculateSecondDigit($baseNumber);
@@ -35,7 +34,7 @@ final class Cnh extends AbstractDocument
     /**
      * {@inheritdoc}
      */
-    public function format()
+    public function format(): string
     {
         return "{$this}";
     }

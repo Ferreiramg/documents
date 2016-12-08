@@ -24,7 +24,7 @@ class Eleven extends State
     /**
      * {@inheritdoc}
      */
-    public function extractBaseNumber($number)
+    public function extractBaseNumber($number):string
     {
         $baseNumber = parent::extractBaseNumber($number);
 
@@ -36,7 +36,7 @@ class Eleven extends State
      *
      * @see http://www.sintegra.gov.br/Cad_Estados/cad_TO.html
      */
-    public function calculateDigit($baseNumber)
+    public function calculateDigit($baseNumber):string
     {
         $calculator = new DigitCalculator($baseNumber);
         $calculator->useComplementaryInsteadOfModule();

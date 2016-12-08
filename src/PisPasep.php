@@ -1,5 +1,5 @@
 <?php
-
+declare(strict_types=1);
 namespace Brazanation\Documents;
 
 final class PisPasep extends AbstractDocument
@@ -24,7 +24,7 @@ final class PisPasep extends AbstractDocument
     /**
      * @return string Returns formatted number, such as: 00.00000.00-0
      */
-    public function format()
+    public function format():string
     {
         return preg_replace(self::REGEX, '$1.$2.$3-$4', "{$this}");
     }
@@ -32,7 +32,7 @@ final class PisPasep extends AbstractDocument
     /**
      * {@inheritdoc}
      */
-    public function calculateDigit($baseNumber)
+    public function calculateDigit($baseNumber):string
     {
         $calculator = new DigitCalculator($baseNumber);
         $calculator->withMultipliersInterval(2, 9);

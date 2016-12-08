@@ -1,5 +1,5 @@
 <?php
-
+declare(strict_types=1);
 namespace Brazanation\Documents;
 
 final class Voter extends AbstractDocument
@@ -19,7 +19,7 @@ final class Voter extends AbstractDocument
      * @param string $section [optional]
      * @param string $zone    [optional]
      */
-    public function __construct($number, $section = null, $zone = null)
+    public function __construct(string $number,  string $section = '', string $zone = '')
     {
         $number = preg_replace('/\D/', '', $number);
         parent::__construct($number, self::LENGTH, 2, self::LABEL);
@@ -33,7 +33,7 @@ final class Voter extends AbstractDocument
      *
      * @return string Returns section.
      */
-    public function getSection()
+    public function getSection():string
     {
         return $this->section;
     }
@@ -43,7 +43,7 @@ final class Voter extends AbstractDocument
      *
      * @return string Returns zone.
      */
-    public function getZone()
+    public function getZone():string
     {
         return $this->zone;
     }
@@ -53,7 +53,7 @@ final class Voter extends AbstractDocument
      *
      * @return string Returns only numbers.
      */
-    public function format()
+    public function format():string
     {
         return "{$this}";
     }
@@ -61,7 +61,7 @@ final class Voter extends AbstractDocument
     /**
      * {@inheritdoc}
      */
-    public function calculateDigit($baseNumber)
+    public function calculateDigit($baseNumber):string
     {
         $firstDigit = $this->calculateFirstDigit($baseNumber);
         $secondDigit = $this->calculateSecondDigit("{$baseNumber}{$firstDigit}");

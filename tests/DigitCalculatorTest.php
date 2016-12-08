@@ -42,6 +42,17 @@ class DigitCalculatorTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals('1', $calculator->calculate());
     }
+    
+    public function testCalculateDigitGetDivisionByZeroException(){
+        
+       $this->setExpectedException("DivisionByZeroError");
+        
+        $calculator = new DigitCalculator('05009401448');
+        $calculator->withMultipliers([9, 8, 7, 6, 5, 4, 3, 2]);
+        $calculator->withModule(0);
+
+         $calculator->calculate();
+    }
 
     /**
      * @param string $number

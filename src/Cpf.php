@@ -1,13 +1,12 @@
 <?php
-
+declare(strict_types=1);
 namespace Brazanation\Documents;
 
 final class Cpf extends AbstractDocument
 {
+
     const LENGTH = 11;
-
     const LABEL = 'CPF';
-
     const REGEX = '/^([\d]{3})([\d]{3})([\d]{3})([\d]{2})$/';
 
     /**
@@ -24,7 +23,7 @@ final class Cpf extends AbstractDocument
     /**
      * @return string Returns formatted number, such as: 000.000.000-00
      */
-    public function format()
+    public function format(): string
     {
         return preg_replace(self::REGEX, '$1.$2.$3-$4', "{$this}");
     }
@@ -32,7 +31,7 @@ final class Cpf extends AbstractDocument
     /**
      * {@inheritdoc}
      */
-    public function calculateDigit($baseNumber)
+    public function calculateDigit($baseNumber): string
     {
         $calculator = new DigitCalculator($baseNumber);
         $calculator->withMultipliersInterval(2, 11);

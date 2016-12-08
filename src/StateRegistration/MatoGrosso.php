@@ -23,13 +23,13 @@ class MatoGrosso extends State
         parent::__construct(self::LONG_NAME, self::LENGTH, self::DIGITS_COUNT, self::REGEX, self::FORMAT);
     }
 
-    public function normalizeNumber($number)
+    public function normalizeNumber($number):string
     {
         if (!empty($number)) {
             return str_pad(parent::normalizeNumber($number), $this->getLength(), '0', STR_PAD_LEFT);
         }
 
-        return $number;
+        return $number??"";
     }
 
     /**
@@ -37,7 +37,7 @@ class MatoGrosso extends State
      *
      * @see http://www.sintegra.gov.br/Cad_Estados/cad_MT.html
      */
-    public function calculateDigit($baseNumber)
+    public function calculateDigit($baseNumber):string
     {
         $calculator = new DigitCalculator($baseNumber);
         $calculator->useComplementaryInsteadOfModule();

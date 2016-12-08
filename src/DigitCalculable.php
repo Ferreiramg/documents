@@ -1,9 +1,11 @@
 <?php
+declare(strict_types = 1);
 
 namespace Brazanation\Documents;
 
 interface DigitCalculable
 {
+
     /**
      * Calculate check digit from base number.
      *
@@ -11,5 +13,5 @@ interface DigitCalculable
      *
      * @return string Returns the checker digit.
      */
-    public function calculateDigit($baseNumber);
+    public function calculateDigit($baseNumber): string;
 }

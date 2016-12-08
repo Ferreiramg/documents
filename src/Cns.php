@@ -1,5 +1,5 @@
 <?php
-
+declare(strict_types=1);
 namespace Brazanation\Documents;
 
 use Brazanation\Documents\Cns\CnsCalculator;
@@ -7,14 +7,11 @@ use Brazanation\Documents\Cns\TemporaryCalculator;
 
 final class Cns extends AbstractDocument
 {
+
     const LENGTH = 15;
-
     const LABEL = 'CNS';
-
     const REGEX = '/^([\d]{3})([\d]{4})([\d]{4})([\d]{4})$/';
-
     const FORMAT = '$1 $2 $3 $4';
-
     const DIGIT_COUNT = 1;
 
     /**
@@ -31,7 +28,7 @@ final class Cns extends AbstractDocument
     /**
      * {@inheritdoc}
      */
-    public function format()
+    public function format(): string
     {
         return preg_replace(self::REGEX, self::FORMAT, "{$this}");
     }
@@ -44,7 +41,7 @@ final class Cns extends AbstractDocument
      * For numbers starting with 7, 8 or 9 will use TemporaryCalculator,
      * otherwise CnsCalculator.
      */
-    public function calculateDigit($baseNumber)
+    public function calculateDigit($baseNumber): string
     {
         $calculator = new CnsCalculator();
 

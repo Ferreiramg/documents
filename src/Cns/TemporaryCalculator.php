@@ -1,5 +1,5 @@
 <?php
-
+declare(strict_types=1);
 namespace Brazanation\Documents\Cns;
 
 use Brazanation\Documents\DigitCalculable;
@@ -10,7 +10,7 @@ class TemporaryCalculator implements DigitCalculable
     /**
      * {@inheritdoc}
      */
-    public function calculateDigit($baseNumber)
+    public function calculateDigit($baseNumber): string
     {
         $calculator = new DigitCalculator($baseNumber);
         $calculator->withMultipliersInterval(1, 15);

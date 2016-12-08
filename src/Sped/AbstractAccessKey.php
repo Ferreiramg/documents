@@ -1,5 +1,5 @@
 <?php
-
+declare(strict_types = 1);
 namespace Brazanation\Documents\Sped;
 
 use Brazanation\Documents\AbstractDocument;
@@ -100,14 +100,14 @@ abstract class AbstractAccessKey extends AbstractDocument
         \DateTime $generatedAt,
         Cnpj $cnpj,
         Model $model,
-        $sequence,
-        $invoiceNumber,
-        $controlNumber
+        int $sequence,
+        int $invoiceNumber,
+        int $controlNumber
     ) {
         $yearMonth = $generatedAt->format('ym');
-        $sequence = str_pad($sequence, 3, 0, STR_PAD_LEFT);
-        $invoiceNumber = str_pad($invoiceNumber, 9, 0, STR_PAD_LEFT);
-        $controlNumber = str_pad($controlNumber, 9, 0, STR_PAD_LEFT);
+        $sequence = sprintf("%03d",$sequence);
+        $invoiceNumber = sprintf("%09d",$invoiceNumber);
+        $controlNumber = sprintf("%09d",$controlNumber);
 
         $baseNumber = "{$state}{$yearMonth}{$cnpj}{$model}{$sequence}{$invoiceNumber}{$controlNumber}";
 
@@ -122,7 +122,7 @@ abstract class AbstractAccessKey extends AbstractDocument
     /**
      * {@inheritdoc}
      */
-    public function format()
+    public function format():string
     {
         return trim(preg_replace(self::REGEX, self::MASK, "{$this}"));
     }
@@ -130,7 +130,7 @@ abstract class AbstractAccessKey extends AbstractDocument
     /**
      * {@inheritdoc}
      */
-    public function calculateDigit($baseNumber)
+    public function calculateDigit($baseNumber):string
     {
         return self::calculateDigitFrom($baseNumber);
     }
@@ -144,7 +144,7 @@ abstract class AbstractAccessKey extends AbstractDocument
      *
      * @return string
      */
-    public static function calculateDigitFrom($baseNumber)
+    public static function calculateDigitFrom($baseNumber):string
     {
         $calculator = new DigitCalculator($baseNumber);
         $calculator->useComplementaryInsteadOfModule();
