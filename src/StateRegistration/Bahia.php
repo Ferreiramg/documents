@@ -26,7 +26,7 @@ final class Bahia extends State
     /**
      * {@inheritdoc}
      */
-    public function normalizeNumber($number)
+    public function normalizeNumber($number):string
     {
         if (!empty($number)) {
             return str_pad(parent::normalizeNumber($number), $this->getLength(), '0', STR_PAD_LEFT);
@@ -40,7 +40,7 @@ final class Bahia extends State
      *
      * @see http://www.sintegra.gov.br/Cad_Estados/cad_BA.html
      */
-    public function calculateDigit($baseNumber)
+    public function calculateDigit($baseNumber):string
     {
         $calculator = new DigitCalculator($baseNumber);
         $calculator->useComplementaryInsteadOfModule();

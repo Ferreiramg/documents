@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 namespace Brazanation\Documents;
 
@@ -32,8 +33,8 @@ namespace Brazanation\Documents;
  */
 class DigitCalculator
 {
-    const MODULE_10 = 10;
 
+    const MODULE_10 = 10;
     const MODULE_11 = 11;
 
     /**
@@ -101,7 +102,7 @@ class DigitCalculator
      *
      * @return DigitCalculator
      */
-    public function withMultipliersInterval($start, $end)
+    public function withMultipliersInterval(int $start, int $end): self
     {
         $multipliers = [];
         for ($i = $start; $i <= $end; ++$i) {
@@ -121,7 +122,7 @@ class DigitCalculator
      *
      * @return DigitCalculator
      */
-    public function withMultipliers(array $multipliers)
+    public function withMultipliers(array $multipliers):self
     {
         $multipliers = array_map(function ($multiplier) {
             if (!assert(is_int($multiplier))) {
@@ -143,7 +144,7 @@ class DigitCalculator
      *
      * @return DigitCalculator
      */
-    public function useComplementaryInsteadOfModule()
+    public function useComplementaryInsteadOfModule():self
     {
         $this->additional = true;
 
@@ -160,7 +161,7 @@ class DigitCalculator
      *
      * @return DigitCalculator
      */
-    public function replaceWhen($replaceTo, ...$integers)
+    public function replaceWhen(string $replaceTo, int ...$integers):self
     {
         foreach ($integers as $integer) {
             $this->replacements->offsetSet($integer, $replaceTo);
@@ -178,7 +179,7 @@ class DigitCalculator
      *
      * @return DigitCalculator
      */
-    public function withModule($module)
+    public function withModule(int $module):self
     {
         $this->module = $module;
 
@@ -204,23 +205,28 @@ class DigitCalculator
      * Calculates the check digit from given numeric section.
      *
      * @return string Returns a single calculated digit.
+     * @throws \DivisionByZeroError
      */
     public function calculate()
     {
         $sum = 0;
         $position = 0;
-        foreach ($this->number as $digit) {
-            $multiplier = $this->multipliers->offsetGet($position);
-            $total = $digit * $multiplier;
-            $sum += $this->calculateSingleSum($total);
-            $position = $this->nextMultiplier($position);
+        try {
+            foreach ($this->number as $digit) {
+                $multiplier = $this->multipliers->offsetGet($position);
+                $total = $digit * $multiplier;
+                $sum += $this->calculateSingleSum($total);
+                $position = $this->nextMultiplier($position);
+            }
+
+            $result = $sum % $this->module;
+
+            $result = $this->calculateAdditionalDigit($result);
+
+            return $this->replaceDigit($result);
+        } catch (\DivisionByZeroError $e) {
+            throw new \DivisionByZeroError("{$sum} cant by  division by zero.");
         }
-
-        $result = $sum % $this->module;
-
-        $result = $this->calculateAdditionalDigit($result);
-
-        return $this->replaceDigit($result);
     }
 
     /**
@@ -295,7 +301,7 @@ class DigitCalculator
      *
      * @return DigitCalculator
      */
-    public function addDigit($digit)
+    public function addDigit($digit): self
     {
         $numbers = $this->number->getArrayCopy();
         array_unshift($numbers, $digit);

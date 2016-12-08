@@ -8,7 +8,7 @@ class VoterTest extends DocumentTestCase
 {
     public function createDocument($number)
     {
-        return new Voter($number, null, null);
+        return new Voter($number);
     }
 
     public function provideValidNumbers()
@@ -33,16 +33,14 @@ class VoterTest extends DocumentTestCase
     public function provideEmptyData()
     {
         return [
-            [Voter::LABEL, ''],
-            [Voter::LABEL, null],
-            [Voter::LABEL, 0],
+            [Voter::LABEL, '']
         ];
     }
 
     public function provideInvalidNumber()
     {
         return [
-            [Voter::LABEL, 1],
+            [Voter::LABEL, '1'],
             [Voter::LABEL, '123123232323'],
             [Voter::LABEL, '861238979874'],
         ];

@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 namespace Brazanation\Documents\StateRegistration;
 
@@ -6,16 +7,12 @@ use Brazanation\Documents\DigitCalculator;
 
 final class Acre extends State
 {
+
     const LONG_NAME = 'Acre';
-
     const SHORT_NAME = 'AC';
-
     const REGEX = '/^(01)(\d{3})(\d{3})(\d{3})(\d{2})$/';
-
     const FORMAT = '$1.$2.$3/$4-$5';
-
     const LENGTH = 13;
-
     const DIGITS_COUNT = 2;
 
     public function __construct()
@@ -28,7 +25,7 @@ final class Acre extends State
      *
      * @see http://www.sintegra.gov.br/Cad_Estados/cad_AC.html
      */
-    public function calculateDigit($baseNumber)
+    public function calculateDigit($baseNumber): string
     {
         $calculator = new DigitCalculator($baseNumber);
         $calculator->useComplementaryInsteadOfModule();

@@ -24,7 +24,7 @@ final class SaoPaulo implements StateInterface
     /**
      * {@inheritdoc}
      */
-    public function normalizeNumber($number)
+    public function normalizeNumber($number): string
     {
         $this->defineStrategy($number);
 
@@ -36,7 +36,7 @@ final class SaoPaulo implements StateInterface
     /**
      * {@inheritdoc}
      */
-    public function getState()
+    public function getState():string
     {
         return $this->calculation->getState();
     }
@@ -44,7 +44,7 @@ final class SaoPaulo implements StateInterface
     /**
      * {@inheritdoc}
      */
-    public function extractBaseNumber($number)
+    public function extractBaseNumber($number):string
     {
         return $this->calculation->extractBaseNumber($number);
     }
@@ -52,7 +52,7 @@ final class SaoPaulo implements StateInterface
     /**
      * {@inheritdoc}
      */
-    public function extractCheckerDigit($number)
+    public function extractCheckerDigit($number):string
     {
         return $this->calculation->extractCheckerDigit($number);
     }
@@ -60,7 +60,7 @@ final class SaoPaulo implements StateInterface
     /**
      * {@inheritdoc}
      */
-    public function getLength()
+    public function getLength():int
     {
         return $this->calculation->getLength();
     }
@@ -68,7 +68,7 @@ final class SaoPaulo implements StateInterface
     /**
      * {@inheritdoc}
      */
-    public function getFormat()
+    public function getFormat(): string
     {
         return $this->calculation->getFormat();
     }
@@ -76,7 +76,7 @@ final class SaoPaulo implements StateInterface
     /**
      * {@inheritdoc}
      */
-    public function getNumberOfDigits()
+    public function getNumberOfDigits():int
     {
         return $this->calculation->getNumberOfDigits();
     }
@@ -84,7 +84,7 @@ final class SaoPaulo implements StateInterface
     /**
      * {@inheritdoc}
      */
-    public function getRegex()
+    public function getRegex(): string
     {
         return $this->calculation->getRegex();
     }
@@ -94,7 +94,7 @@ final class SaoPaulo implements StateInterface
      *
      * @see http://www.sintegra.gov.br/Cad_Estados/cad_SP.html
      */
-    public function calculateDigit($baseNumber)
+    public function calculateDigit($baseNumber): string
     {
         return $this->calculation->calculateDigit($baseNumber);
     }

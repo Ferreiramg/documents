@@ -28,7 +28,7 @@ final class Amapa extends State
      *
      * @see http://www.sintegra.gov.br/Cad_Estados/cad_AP.html
      */
-    public function calculateDigit($baseNumber)
+    public function calculateDigit($baseNumber):string
     {
         $number = intval($baseNumber);
         $lastDigit = $this->discoverLastDigit($number);

@@ -31,8 +31,8 @@ class NFeAccessKeyTest extends DocumentTestCase
     {
         return [
             [NFeAccessKey::LABEL, ''],
-            [NFeAccessKey::LABEL, null],
-            [NFeAccessKey::LABEL, 0],
+            [NFeAccessKey::LABEL, 'null'],
+            [NFeAccessKey::LABEL, '0'],
         ];
     }
 
@@ -60,7 +60,7 @@ class NFeAccessKeyTest extends DocumentTestCase
             new Cnpj('33009911002506'),
             12,
             780,
-            26730161
+            '26730161'
         );
         $this->assertEquals('52060433009911002506550120000007800267301615', "{$nfeKey}");
     }

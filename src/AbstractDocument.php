@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 namespace Brazanation\Documents;
 
@@ -6,6 +7,7 @@ use Brazanation\Documents\Exception\InvalidDocument as InvalidDocumentException;
 
 abstract class AbstractDocument implements DigitCalculable, Formattable
 {
+
     /**
      * @var string
      */
@@ -74,7 +76,7 @@ abstract class AbstractDocument implements DigitCalculable, Formattable
      *
      * @return bool Returns true if it is a valid number, otherwise false.
      */
-    protected function isValid($number)
+    protected function isValid($number): bool
     {
         $baseNumber = $this->extractBaseNumber($number);
 
@@ -98,7 +100,7 @@ abstract class AbstractDocument implements DigitCalculable, Formattable
      *
      * @return string
      */
-    public function __toString()
+    public function __toString(): string
     {
         return "{$this->number}";
     }
@@ -110,9 +112,12 @@ abstract class AbstractDocument implements DigitCalculable, Formattable
      *
      * @return string Returns only base number without checker digit.
      */
-    protected function extractBaseNumber($number)
+    protected function extractBaseNumber($number): string
     {
-        return substr($number, 0, -($this->numberOfDigits));
+        if ($number = substr($number, 0, -($this->numberOfDigits))) {
+            return $number;
+        }
+        return "";
     }
 
     /**
@@ -122,7 +127,7 @@ abstract class AbstractDocument implements DigitCalculable, Formattable
      *
      * @return string Returns only checker digit.
      */
-    protected function extractCheckerDigit($number)
+    protected function extractCheckerDigit($number): string
     {
         return substr($number, -($this->numberOfDigits));
     }

@@ -1,4 +1,5 @@
 <?php
+declare(strict_types = 1);
 
 namespace Brazanation\Documents;
 
@@ -66,6 +67,7 @@ use Brazanation\Documents\StateRegistration\Tocantins;
  */
 final class StateRegistration extends AbstractDocument
 {
+
     /**
      * @var StateInterface
      */
@@ -123,7 +125,7 @@ final class StateRegistration extends AbstractDocument
      *
      * @return StateRegistration
      */
-    public static function __callStatic($name, $arguments)
+    public static function __callStatic($name, $arguments): self
     {
         $class = self::$availableStates[$name];
         $reflection = new \ReflectionClass($class);
@@ -137,7 +139,7 @@ final class StateRegistration extends AbstractDocument
     /**
      * {@inheritdoc}
      */
-    protected function extractBaseNumber($number)
+    protected function extractBaseNumber($number): string
     {
         return $this->state->extractBaseNumber($number);
     }
@@ -145,7 +147,7 @@ final class StateRegistration extends AbstractDocument
     /**
      * {@inheritdoc}
      */
-    protected function extractCheckerDigit($number)
+    protected function extractCheckerDigit($number): string
     {
         return $this->state->extractCheckerDigit($number);
     }
@@ -155,7 +157,7 @@ final class StateRegistration extends AbstractDocument
      *
      * @return string Returns only numbers.
      */
-    public function format()
+    public function format(): string
     {
         return preg_replace($this->state->getRegex(), $this->state->getFormat(), "{$this}");
     }
@@ -163,7 +165,7 @@ final class StateRegistration extends AbstractDocument
     /**
      * {@inheritdoc}
      */
-    public function calculateDigit($baseNumber)
+    public function calculateDigit($baseNumber): string
     {
         $digit = $this->state->calculateDigit($baseNumber);
 

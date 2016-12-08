@@ -6,16 +6,12 @@ use Brazanation\Documents\DigitCalculator;
 
 final class Goias extends State
 {
+
     const LONG_NAME = 'Goias';
-
     const REGEX = '/^(1[015])(\d{3})(\d{3})(\d{1})$/';
-
     const FORMAT = '$1.$2.$3-$4';
-
     const LENGTH = 9;
-
     const DIGITS_COUNT = 1;
-
     const SHORT_NAME = 'GO';
 
     /**
@@ -34,11 +30,19 @@ final class Goias extends State
      *
      * @return Goias
      */
-    private function setCurrentDigit($digit)
+    private function setCurrentDigit($digit):self
     {
         $this->digit = $digit;
 
         return $this;
+    }
+
+    public function normalizeNumber($number): string
+    {
+        $number = parent::normalizeNumber($number);
+        $this->setCurrentDigit(substr($number, -($this->getNumberOfDigits())));
+
+        return $number;
     }
 
     /**
@@ -46,7 +50,7 @@ final class Goias extends State
      *
      * @see http://www.sintegra.gov.br/Cad_Estados/cad_GO.html
      */
-    public function calculateDigit($baseNumber)
+    public function calculateDigit($baseNumber): string
     {
         $digitToReplace = $this->discoverDigitToReplace(intval($baseNumber));
 
@@ -103,13 +107,5 @@ final class Goias extends State
         }
 
         return $digitToReplace;
-    }
-
-    public function normalizeNumber($number)
-    {
-        $number = parent::normalizeNumber($number);
-        $this->setCurrentDigit(substr($number, -($this->getNumberOfDigits())));
-
-        return $number;
     }
 }
