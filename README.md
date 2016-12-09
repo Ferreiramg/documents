@@ -16,7 +16,7 @@ Install the library using [composer][1]. Add the following to your `composer.jso
 ```json
 {
     "require": {
-        "brazanation/documents": "0.4.*"
+        "brazanation/documents": "0.6.*"
     }
 }
 ```
@@ -30,7 +30,7 @@ $ composer.phar install
 or
 
 ```sh
-$ composer require brazanation/documents 0.4.*
+$ composer require brazanation/documents 0.6.*
 ```
 
 ### CPF (cadastro de pessoas físicas)
@@ -84,18 +84,25 @@ catch (InvalidDocumentException $e){
 }
 ```
 
-### Chave NFE (chave da nota fiscal eletrônica)
+### Chave de Acesso Sped (chave da NFe, CTe e MDFe)
 
-NFe Access Key
+Sped Access Key
+
+Available models:
+* NFe
+* NFCe
+* CTe
+* CTeOther
+* MDFe
 
 ```php
-use Brazanation\Documents\NFeAccessKey;
+use Brazanation\Documents\Sped\NFe;
 use Brazanation\Documents\Exception\InvalidDocument as  InvalidDocumentException;
 
 try {
-    $nfeKey = new NFeAccessKey('52060433009911002506550120000007800267301615');
-    echo $nfeKey; // prints 52060433009911002506550120000007800267301615
-    echo $nfeKey->format(); // prints 5206 0433 0099 1100 2506 5501 2000 0007 8002 6730 1615
+    $accessKey = new NFe('52060433009911002506550120000007801267301613');
+    echo $accessKey; // prints 52060433009911002506550120000007801267301613
+    echo $accessKey->format(); // prints 5206 0433 0099 1100 2506 5501 2000 0007 8012 6730 1613
 catch (InvalidDocumentException $e){
     echo $e->getMessage();
 }
@@ -104,15 +111,16 @@ or generate your number
 
 ```php
 try {
-    $nfeKey = NFeAccessKey::generate(
+    $nfeKey = NFe::generate(
         52,
-        \DateTime::createFromFormat('ym', '0604'),
+        $generatedAt,
         new Cnpj('33009911002506'),
         12,
         780,
+        EmissionType::normal(),
         26730161
     );
-    echo $nfeKey; // prints 52060433009911002506550120000007800267301615
+    echo $accessKey; // prints 52060433009911002506550120000007801267301613
 catch (InvalidDocumentException $e){
     echo $e->getMessage();
 }
